@@ -5,11 +5,11 @@ allfiles = ['b_should_be_easy.in', 'c_no_hurry.in', 'd_metropolis.in', 'e_high_b
 alldfs = []
 
 for file in allfiles:
-    f = open(file, 'r')
-    df = pd.DataFrame([ride.split(" ") for ride in f.readlines()],
-                  dtype=float,
-                  columns=['start_row', 'start_col', 'end_row', 'end_col', 'time_earliest', 'time_latest'])
-    alldfs.append(df)
+    with open(file, 'r') as f:
+        df = pd.DataFrame([ride.split(" ") for ride in f.readlines()],
+                      dtype=float,
+                      columns=['start_row', 'start_col', 'end_row', 'end_col', 'time_earliest', 'time_latest'])
+        alldfs.append(df)
 
 b_df, c_df, d_df, e_df = alldfs
 
