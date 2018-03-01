@@ -9,22 +9,6 @@ import os
 import glob
 
 
-# In[ ]:
-
-
-get_ipython().system('head -n 100 ')
-
-
-# In[4]:
-
-
-a=pd.read_csv('a_example.in')
-b=pd.read_csv('b_should_be_easy.in')
-c=pd.read_csv('c_no_hurry.in')
-d=pd.read_csv('d_metropolis.in')
-e=pd.read_csv('e_high_bonus.in')
-
-
 # In[23]:
 
 
@@ -66,10 +50,12 @@ df_vehicles=pd.DataFrame({'vehicleID':[range(nVehicles)].'rideID':[].'steps_avai
 def stepSubstract(row):
     row['steps_available']=row['steps_available']-1
     row['steps_needed']=row['steps_needed']-1
-    if row['steps_available']==0:
-        row['status']='available'
+    if row['steps_needed']==0:
+        row['status']='start'
         row['rideID']=row['rideID'].append(row['rideToComplete'])
         row['rideToComplete']=''
+    if row['steps_available']==0:
+        row['status']='stop'
 def assignRideToVehicle(dfVehicles,rideRow,dfRides):
     #get first vehicle capable
     vehicleID=dfVehicles[dfVehicles['steps_available']=>rideRow['steps_needed']].iloc[1,'vehicleID']
