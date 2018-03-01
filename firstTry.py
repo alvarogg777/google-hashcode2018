@@ -16,13 +16,17 @@ b_df, c_df, d_df, e_df = alldfs
 """
 LET'S WORK WITH THE FIRST DATASET: b_should_be_easy.in
 """
-# sort by earliest time
-b_df.sort_values(by='time_earliest', inplace=True)
 
 # save useful variables
 b_NUM_ROWS, b_NUM_COLS, b_NUM_VEHICLES, b_NUM_RIDES, b_NUM_BONUS, b_NUM_STEPS = b_df.loc[0, :]
 
 # remove first row
 b_df = b_df[1:]
+
+# compute distance
+b_df['distance'] = np.abs(b_df.end_col - b_df.start_col) + np.abs(b_df.end_row - b_df.start_row)
+
+# sort by earliest time and distance
+b_df.sort_values(by=['time_earliest', 'distance'], inplace=True)
 
 print(b_df.head())
