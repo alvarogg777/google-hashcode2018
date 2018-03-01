@@ -13,4 +13,11 @@ rides_df['start_row'] = rides_df['start_row'].astype(float)
 
 # sort by earliest time
 rides_df.sort_values(by='time_earliest', inplace=True)
+
+# save useful variables
+NUM_ROWS, NUM_COLS, NUM_VEHICLES, NUM_RIDES, NUM_BONUS, NUM_STEPS = rides_df.loc[0, :]
+
+# remove first row
+rides_df = rides_df[1:]
+
 print(rides_df.head())
